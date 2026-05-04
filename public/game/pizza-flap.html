@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Pizza Slice Bodega Run</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      touch-action: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      background: #1a1520;
+      font-family: "Georgia", "Times New Roman", serif;
+    }
+    #wrap {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #87ceeb 0%, #b8d4e8 45%, #e8dcc8 100%);
+    }
+    canvas {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <canvas id="game" width="400" height="600"></canvas>
+  </div>
+  <script>
+(function () {
+  const canvas = document.getElementById("game");
+  const ctx = canvas.getContext("2d");
+
+  const W = 400;
+  const H = 600;
+  let scale = 1;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  function resize() {
+    const pad = 8;
+    const vw = window.innerWidth - pad * 2;
+    const vh = window.innerHeight - pad * 2;
+    scale = Math.min(vw / W, vh / H, 2);
+    canvas.style.width = W * scale + "px";
+    canvas.style.height = H * scale + "px";
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  function canvasCoords(clientX, clientY) {
+    const r = canvas.getBoundingClientRect();
+    const x = ((clientX - r.left) / r.width) * W;
+    const y = ((clientY - r.top) / r.height) * H;
+    return { x, y };
+  }
+
+  const GRAVITY = 1350;
+  const FLAP = -380;
+  const PIPE_W = 56;
+  const PIPE_GAP = 148;
+  const PIPE_SPEED = 165;
+  const PIPE_INTERVAL = 2100;
+  const PIZZA_R = 22;
+
+  let state = "title";
+  let pizzaY = H * 0.42;
+  let pizzaVy = 0;
+  let pipes = [];
+  let lastPipeTime = 0;
+  let score = 0;
+  let highScore = 0;
+  try {
+    highScore = parseInt(localStorage.getItem("pizzaBodegaHigh") || "0", 10) || 0;
+  } catch (e) {}
+
+  function resetGame() {
+    pizzaY = H * 0.42;
+    pizzaVy = 0;
+    pipes = [];
+    lastPipeTime = performance.now();
+    score = 0;
+  }
+
+  function flap() {
+    if (state === "title") {
+      state = "play";
+      resetGame();
+      pizzaVy = FLAP * 0.85;
+      return;
+    }
+    if (state === "play") {
+      pizzaVy = FLAP;
+      return;
+    }
+    if (state === "over") {
+      state = "play";
+      resetGame();
+      pizzaVy = FLAP * 0.85;
+    }
+  }
+
+  function addPipe(now) {
+    const margin = 90;
+    const minY = margin + PIPE_GAP / 2;
+    const maxY = H - margin - PIPE_GAP / 2;
+    const gapCenter = minY + Math.random() * (maxY - minY);
+    pipes.push({
+      x: W + PIPE_W,
+      gapCenter,
+      passed: false,
+      hue: 200 + Math.random() * 80,
+    });
+  }
+
+  function drawSky() {
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#7ec8e3");
+    g.addColorStop(0.5, "#c5dff0");
+    g.addColorStop(1, "#f0e6d8");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = "rgba(255,255,255,0.35)";
+    for (let i = 0; i < 6; i++) {
+      const cx = ((Date.now() / 50 + i * 120) % (W + 100)) - 50;
+      const cy = 40 + i * 18;
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, 45, 14, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  /** Bodega column between y = y0 (top) and y = y1 (bottom), centered at px */
+  function drawBodegaSign(px, y0, y1, hue) {
+    const w = PIPE_W;
+    const x = px - w / 2;
+    const bodyH = y1 - y0;
+    if (bodyH < 8) return;
+
+    const awningStripes = 5;
+    const awningH = Math.min(18, bodyH * 0.22);
+    const pad = 3;
+
+    ctx.fillStyle = "#2a2520";
+    ctx.fillRect(x - pad, y0, w + pad * 2, bodyH);
+
+    for (let s = 0; s < awningStripes; s++) {
+      ctx.fillStyle = s % 2 === 0 ? "#c41e3a" : "#f5f5dc";
+      ctx.fillRect(x + s * (w / awningStripes), y0 + 3, w / awningStripes + 1, awningH);
+    }
+
+    const signY = y0 + awningH + 8;
+    const signH = Math.max(24, bodyH - awningH - 16);
+    ctx.fillStyle = `hsl(${hue}, 45%, 22%)`;
+    ctx.fillRect(x + 2, signY, w - 4, signH);
+
+    ctx.strokeStyle = "#ffd700";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x + 4, signY + 3, w - 8, signH - 6);
+
+    ctx.fillStyle = "#fffef0";
+    ctx.font = "bold 9px sans-serif";
+    ctx.textAlign = "center";
+    const lines = ["DELI", "&", "GROCERY"];
+    const lineStep = Math.min(11, (signH - 20) / 3);
+    for (let i = 0; i < lines.length; i++) {
+      ctx.fillText(lines[i], px, signY + 16 + i * lineStep);
+    }
+
+    ctx.fillStyle = "rgba(255,200,80,0.9)";
+    ctx.font = "7px sans-serif";
+    ctx.fillText("OPEN 24 HR", px, signY + signH - 8);
+  }
+
+  function drawPizzaSlice(cx, cy, rot) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(rot);
+
+    const r = PIZZA_R;
+    ctx.beginPath();
+    ctx.moveTo(0, -r * 0.2);
+    ctx.arc(0, 0, r, -Math.PI * 0.35, Math.PI * 0.35, false);
+    ctx.closePath();
+
+    const pg = ctx.createRadialGradient(-4, -4, 0, 0, 0, r);
+    pg.addColorStop(0, "#ffe566");
+    pg.addColorStop(0.6, "#f4a020");
+    pg.addColorStop(1, "#c97810");
+    ctx.fillStyle = pg;
+    ctx.fill();
+    ctx.strokeStyle = "#8b4513";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.fillStyle = "#c41e3a";
+    [[-6, -2], [2, 4], [-3, 8], [6, -4]].forEach(([dx, dy]) => {
+      ctx.beginPath();
+      ctx.arc(dx, dy, 3.2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.fillStyle = "rgba(255,255,255,0.35)";
+    ctx.beginPath();
+    ctx.arc(-5, -8, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  function pizzaRect() {
+    return {
+      left: 72 - PIZZA_R,
+      right: 72 + PIZZA_R,
+      top: pizzaY - PIZZA_R * 0.9,
+      bottom: pizzaY + PIZZA_R * 0.95,
+    };
+  }
+
+  function pipeRects(p) {
+    const x = p.x;
+    const half = PIPE_W / 2;
+    const gc = p.gapCenter;
+    const g2 = PIPE_GAP / 2;
+    return {
+      top: { left: x - half, right: x + half, top: 0, bottom: gc - g2 },
+      bot: { left: x - half, right: x + half, top: gc + g2, bottom: H },
+    };
+  }
+
+  function intersects(a, b) {
+    return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+  }
+
+  function drawScore() {
+    ctx.save();
+    ctx.fillStyle = "rgba(0,0,0,0.25)";
+    ctx.font = "bold 28px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(String(score), W / 2 + 2, 52);
+    ctx.fillStyle = "#fff";
+    ctx.strokeStyle = "#2a1810";
+    ctx.lineWidth = 4;
+    ctx.strokeText(String(score), W / 2, 50);
+    ctx.fillText(String(score), W / 2, 50);
+    ctx.restore();
+  }
+
+  function drawTitle() {
+    ctx.fillStyle = "rgba(0,0,0,0.45)";
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = "#fff8e7";
+    ctx.strokeStyle = "#4a3020";
+    ctx.lineWidth = 3;
+    ctx.font = "bold 22px Georgia, serif";
+    ctx.textAlign = "center";
+    ctx.strokeText("Pizza Slice", W / 2, H * 0.32);
+    ctx.fillText("Pizza Slice", W / 2, H * 0.32);
+    ctx.font = "bold 18px Georgia, serif";
+    ctx.strokeText("Bodega Run", W / 2, H * 0.32 + 26);
+    ctx.fillText("Bodega Run", W / 2, H * 0.32 + 26);
+    ctx.font = "14px sans-serif";
+    ctx.fillStyle = "#f5e6c8";
+    ctx.strokeStyle = "#2a1810";
+    ctx.lineWidth = 2;
+    ctx.strokeText("Tap / click to flap", W / 2, H * 0.52);
+    ctx.fillText("Tap / click to flap", W / 2, H * 0.52);
+    ctx.font = "12px sans-serif";
+    ctx.strokeText("Dodge the signs!", W / 2, H * 0.52 + 24);
+    ctx.fillText("Dodge the signs!", W / 2, H * 0.52 + 24);
+  }
+
+  function drawGameOver() {
+    ctx.fillStyle = "rgba(0,0,0,0.55)";
+    ctx.fillRect(0, 0, W, H);
+    const bx = W / 2;
+    const by = H * 0.45;
+    const bw = 260;
+    const bh = 160;
+    ctx.fillStyle = "#3d2914";
+    ctx.fillRect(bx - bw / 2, by - bh / 2, bw, bh);
+    ctx.strokeStyle = "#ffd700";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(bx - bw / 2 + 4, by - bh / 2 + 4, bw - 8, bh - 8);
+    ctx.fillStyle = "#fff8e7";
+    ctx.font = "bold 24px Georgia, serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Game Over", bx, by - 38);
+    ctx.font = "18px sans-serif";
+    ctx.fillText("Score: " + score, bx, by - 4);
+    ctx.fillStyle = "#c9a227";
+    ctx.fillText("Best: " + highScore, bx, by + 22);
+    ctx.fillStyle = "#e8dcc8";
+    ctx.font = "14px sans-serif";
+    ctx.fillText("Tap to restart", bx, by + 52);
+  }
+
+  let lastT = performance.now();
+
+  function frame(now) {
+    const dt = Math.min(0.033, (now - lastT) / 1000);
+    lastT = now;
+
+    drawSky();
+
+    if (state === "play") {
+      pizzaVy += GRAVITY * dt;
+      pizzaY += pizzaVy * dt;
+
+      if (pizzaY < PIZZA_R) {
+        pizzaY = PIZZA_R;
+        pizzaVy = 0;
+        state = "over";
+      }
+      if (pizzaY > H - PIZZA_R - 8) {
+        pizzaY = H - PIZZA_R - 8;
+        state = "over";
+      }
+
+      if (now - lastPipeTime > PIPE_INTERVAL) {
+        addPipe(now);
+        lastPipeTime = now;
+      }
+
+      const pr = pizzaRect();
+      for (let i = pipes.length - 1; i >= 0; i--) {
+        const p = pipes[i];
+        p.x -= PIPE_SPEED * dt;
+        const rects = pipeRects(p);
+        if (intersects(pr, rects.top) || intersects(pr, rects.bot)) {
+          state = "over";
+        }
+        if (!p.passed && p.x < 72) {
+          p.passed = true;
+          score++;
+        }
+        if (p.x < -PIPE_W - 20) pipes.splice(i, 1);
+      }
+
+      if (state === "over" && score > highScore) {
+        highScore = score;
+        try { localStorage.setItem("pizzaBodegaHigh", String(highScore)); } catch (e) {}
+      }
+    } else if (state === "title") {
+      pizzaY = H * 0.42 + Math.sin(now / 400) * 12;
+      pizzaVy = 0;
+    }
+
+    const g2 = PIPE_GAP / 2;
+    for (const p of pipes) {
+      drawBodegaSign(p.x, 0, p.gapCenter - g2, p.hue);
+      drawBodegaSign(p.x, p.gapCenter + g2, H, p.hue);
+    }
+
+    const rot = Math.min(Math.PI / 5, Math.max(-Math.PI / 4, pizzaVy * 0.0012));
+    drawPizzaSlice(72, pizzaY, rot);
+
+    if (state === "play" || state === "over") drawScore();
+    if (state === "title") drawTitle();
+    if (state === "over") drawGameOver();
+
+    requestAnimationFrame(frame);
+  }
+
+  let lastInputT = 0;
+  function onTap(ev) {
+    ev.preventDefault();
+    const t = performance.now();
+    if (t - lastInputT < 85) return;
+    lastInputT = t;
+    flap();
+  }
+
+  canvas.addEventListener("pointerdown", onTap, { passive: false });
+  canvas.addEventListener("touchstart", onTap, { passive: false });
+
+  window.addEventListener("keydown", function (e) {
+    if (e.code === "Space" || e.code === "ArrowUp") {
+      e.preventDefault();
+      flap();
+    }
+  });
+
+  requestAnimationFrame(frame);
+})();
+  </script>
+</body>
+</html>
