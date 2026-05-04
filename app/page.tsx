@@ -22,9 +22,13 @@ export default function Home() {
             <li>✓ Keep customers longer, sell more</li>
             <li>✓ New game every month</li>
           </ul>
-          <button style={{width: '100%', backgroundColor: '#FFB800', color: 'black', padding: '16px', borderRadius: '8px', fontSize: '20px', fontWeight: 'bold', border: 'none'}}>
-            Start 14-Day Free Trial
-          </button>
+          <a 
+  href="https://buy.stripe.com/getclubpos.com"
+  target="_blank"
+  style={{width: '100%', backgroundColor: '#FFB800', color: 'black', padding: '16px', borderRadius: '8px', fontSize: '20px', fontWeight: 'bold', textAlign: 'center', display: 'block', textDecoration: 'none'}}
+>
+  Start 14-Day Free Trial
+</a>
           <p style={{fontSize: '14px', color: '#888', marginTop: '16px'}}>No credit card required</p>
         </div>
       </div>
