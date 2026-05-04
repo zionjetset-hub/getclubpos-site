@@ -15,7 +15,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
         <iframe
   src="/game/pizza-flap.html"
-  className="w-full h-[600px] border-2 border-[#FFB800]"
+  className="w-full h- border-2 border-[#FFB800] rounded-lg"
   title="Pizza Flap"
 />
 
