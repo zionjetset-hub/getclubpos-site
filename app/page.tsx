@@ -12,12 +12,12 @@ export default function Home() {
       
       <section className="py-20 px-4">
         <h2 className="text-4xl font-bold text-center mb-8">PIZZA FLAP</h2>
-        <div className="max-w-4xl mx-auto">
-        <iframe
-  src="/game/pizza-flap.html"
-  className="w-full h- border-2 border-[#FFB800] rounded-lg"
-  title="Pizza Flap"
-/>
+        <div className="w-screen">
+  <iframe
+    src="/game/pizza-flap.html"
+    className="w-full h-screen border-0"
+    title="Pizza Flap"
+  />
 
         </div>
       </section>
