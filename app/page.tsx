@@ -13,10 +13,10 @@ export default function Home() {
       <section className="py-20 px-4">
         <h2 className="text-4xl font-bold text-center mb-8">PIZZA FLAP</h2>
         <div className="max-w-4xl mx-auto">
-          <iframe 
-            src="https://pizza-flap.vercel.app" 
-            className="w-full h-[600px] border-2 border-[#FFB800] rounded-lg"
-          />
+        <div className="w-full h-[600px] border-2 border-[#FFB800] flex items-center justify-center">
+  <p className="text-2xl">Pizza Flap - Coming Soon</p>
+</div>
+
         </div>
       </section>
     </main>
