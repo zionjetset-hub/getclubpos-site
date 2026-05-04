@@ -23,7 +23,7 @@ export default function Home() {
             <li>✓ New game every month</li>
           </ul>
           <a 
-  href="https://buy.stripe.com/getclubpos.com"
+  href="https://buy.stripe.com/3cI4gz66o0rQcGB5zI8IU00"
   target="_blank"
   style={{width: '100%', backgroundColor: '#FFB800', color: 'black', padding: '16px', borderRadius: '8px', fontSize: '20px', fontWeight: 'bold', textAlign: 'center', display: 'block', textDecoration: 'none'}}
 >
