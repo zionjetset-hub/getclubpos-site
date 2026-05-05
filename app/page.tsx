@@ -23,11 +23,12 @@ export default function Home() {
             <li>✓ New game every month</li>
           </ul>
           <a 
-  href="https://buy.stripe.com/28E00j52k0rQ9up2nw8IU01"
+  href="https://buy.stripe.com/YOUR_NEW_1499_LINK_HERE"
+"
   target="_blank"
   style={{width: '100%', backgroundColor: '#FFB800', color: 'black', padding: '16px', borderRadius: '8px', fontSize: '20px', fontWeight: 'bold', textAlign: 'center', display: 'block', textDecoration: 'none'}}
 >
-  Start 14-Day Free Trial
+  join slice club-$14.99/mo
 </a>
           <p style={{fontSize: '14px', color: '#888', marginTop: '16px'}}>No credit card required</p>
         </div>
