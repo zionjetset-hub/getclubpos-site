@@ -22,14 +22,13 @@ export default function Home() {
             <li>✓ Keep customers longer, sell more</li>
             <li>✓ New game every month</li>
           </ul>
-          <a 
-  href="https://buy.stripe.com/aFa4gz2UcgqO6id0fo8IU02"
-"
-  target="_blank"
-  style={{width: '100%', backgroundColor: '#FFB800', color: 'black', padding: '16px', borderRadius: '8px', fontSize: '20px', fontWeight: 'bold', textAlign: 'center', display: 'block', textDecoration: 'none'}}
->
-  join slice club-$14.99/mo
-</a>
+          <a
+          href="https://buy.stripe.com/aFa4gz2UcgqO6id0fo8IU02"
+          target="_blank"
+          style={{width: '100%', backgroundColor: '#FFB800', color: 'black'}}
+        >
+          Join Slice Club - $14.99/mo
+        </a>
           <p style={{fontSize: '14px', color: '#888', marginTop: '16px'}}>No credit card required</p>
         </div>
       </div>
