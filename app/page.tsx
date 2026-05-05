@@ -12,9 +12,8 @@ export default function Home() {
           $14.99
         </h2>
         <ul style={{fontSize: '18px', marginBottom: '32px', lineHeight: '1.6'}}>
-          <li>1 slice per day, dine-in only</li>
+          <li>1 slice per day, every four hours</li>
           <li>Cancel anytime</li>
-          <li>First-time members only</li>
         </ul>
         <a 
           href="https://buy.stripe.com/aFa4gz2Ucgq06id0fo8IU02"
