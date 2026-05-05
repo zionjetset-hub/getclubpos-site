@@ -27,10 +27,10 @@ export default function Home() {
           target="_blank"
           style={{width: '100%', backgroundColor: '#FFB800', color: 'black'}}
         >
-          Join Slice Club - $14.99/mo
-        </a>
-          <p style={{fontSize: '14px', color: '#888', marginTop: '16px'}}>No credit card required</p>
-        </div>
+          Join Slice Club-$14.99/mo
+          </a> 
+          <p style={{fontSize: '14px', color: '#888', marginTop: '16px'}}>
+            
       </div>
 
       {/* RIGHT: GAME */}
