@@ -14,10 +14,10 @@ export default function Home() {
         <p style={{fontSize: '24px', marginBottom: '32px', color: '#ccc'}}>The Operating System for Bodegas</p>
         
         <div style={{border: '2px solid #FFB800', borderRadius: '12px', padding: '32px', backgroundColor: '#111'}}>
-          <h2 style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '8px', color: '#FFB800'}}>Model 1: Slice Club</h2>
+        <h2 style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '8px', color: '#FFB800'}}>
           $14.99
-<ul style={{fontSize: '18px', marginBottom: '32px', lineHeight: '1.6'}}>
-  <li>✓ Unlimited arcade games in-store</li>
+        </h2>
+        <ul style={{fontSize: '18px', marginBottom: '32px', lineHeight: '1.6'}}>     
   <li>✓ Customer loyalty & rewards</li>
   <li>✓ Keep customers longer, sell more</li>
   <li>✓ New game every month</li>
