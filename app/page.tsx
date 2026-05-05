@@ -15,7 +15,7 @@ export default function Home() {
         
         <div style={{border: '2px solid #FFB800', borderRadius: '12px', padding: '32px', backgroundColor: '#111'}}>
           <h2 style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '8px', color: '#FFB800'}}>Model 1: Slice Club</h2>
-          <p style={{fontSize: '72px', fontWeight: 'bold', marginBottom: '16px'}}>$14.99</p>
+          https://buy.stripe.com/aFa4gz2UcgqO6id0fo8IU02
 <ul style={{fontSize: '18px', marginBottom: '32px', lineHeight: '1.6'}}>
   <li>✓ Unlimited arcade games in-store</li>
   <li>✓ Customer loyalty & rewards</li>
@@ -29,7 +29,7 @@ export default function Home() {
 >
   Join Slice Club-$14.99/mo
 </a>
-          <p style={{fontSize: '14px', color: '#888', marginTop: '16px'}}>
+          
 
       {/* RIGHT: GAME */}
       <div style={{width: '50%', backgroundColor: '#0a0a0a', display: 'flex', flexDirection: 'column'}}>
