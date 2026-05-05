@@ -1,46 +1,28 @@
 export default function Home() {
   return (
-    <main style={{
-      backgroundColor: 'black', 
-      color: 'white', 
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'row'
-    }}>
-      
-      {/* LEFT: PRICING */}
-      <div style={{width: '50%', padding: '32px', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-        <h1 style={{fontSize: '60px', fontWeight: 'bold', color: '#FFB800', marginBottom: '16px'}}>CLUBPOS</h1>
-        <p style={{fontSize: '24px', marginBottom: '32px', color: '#ccc'}}>The Operating System for Bodegas</p>
-        
-        <div style={{border: '2px solid #FFB800', borderRadius: '12px', padding: '32px', backgroundColor: '#111'}}>
+    <main style={{minHeight: '100vh', backgroundColor: '#000', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px'}}>
+      <div style={{maxWidth: '600px', textAlign: 'center'}}>
+        <h1 style={{fontSize: '48px', fontWeight: 'bold', marginBottom: '24px', lineHeight: '1.1'}}>
+          Mike's Pizza Slice Club
+        </h1>
+        <p style={{fontSize: '20px', marginBottom: '32px', color: '#ccc'}}>
+          One slice per day. Every day. For members only.
+        </p>
         <h2 style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '8px', color: '#FFB800'}}>
           $14.99
         </h2>
-        <ul style={{fontSize: '18px', marginBottom: '32px', lineHeight: '1.6'}}>     
-  <li>✓ Customer loyalty & rewards</li>
-  <li>✓ Keep customers longer, sell more</li>
-  <li>✓ New game every month</li>
-</ul>
-<a
-  href="https://buy.stripe.com/aFa4gz2Ucgq06id0fo8IU02"
-  target="_blank"
-  style={{width: '100%', backgroundColor: '#FFB800', color: 'black'}}
->
-  Join Slice Club-$14.99/mo
-</a>          
-      {/* RIGHT: GAME */}
-      <div style={{width: '50%', backgroundColor: '#0a0a0a', display: 'flex', flexDirection: 'column'}}>
-        <div style={{padding: '16px', textAlign: 'center', backgroundColor: '#FFB800', color: 'black'}}>
-          <h3 style={{fontSize: '20px', fontWeight: 'bold', margin: 0}}>LIVE DEMO: Tap to Play Pizza Flap</h3>
-        </div>
-        <iframe
-          src="/game/pizza-flap.html"
-          style={{width: '100%', height: '100%', border: 'none', flex: 1}}
-          title="Pizza Flap"
-        />
+        <ul style={{fontSize: '18px', marginBottom: '32px', lineHeight: '1.6'}}>
+          <li>1 slice per day, dine-in only</li>
+          <li>Cancel anytime</li>
+          <li>First-time members only</li>
+        </ul>
+        <a 
+          href="https://buy.stripe.com/aFa4gz2Ucgq06id0fo8IU02"
+          style={{display: 'inline-block', backgroundColor: '#FFB800', color: '#000', fontWeight: 'bold', fontSize: '20px', padding: '16px 32px', borderRadius: '8px', textDecoration: 'none'}}
+        >
+          Join Slice Club-$14.99/mo
+        </a>
       </div>
-
     </main>
   );
 }
