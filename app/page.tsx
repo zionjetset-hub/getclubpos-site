@@ -28,9 +28,7 @@ export default function Home() {
   style={{width: '100%', backgroundColor: '#FFB800', color: 'black'}}
 >
   Join Slice Club-$14.99/mo
-</a>
-          
-
+</a>          
       {/* RIGHT: GAME */}
       <div style={{width: '50%', backgroundColor: '#0a0a0a', display: 'flex', flexDirection: 'column'}}>
         <div style={{padding: '16px', textAlign: 'center', backgroundColor: '#FFB800', color: 'black'}}>
