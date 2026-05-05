@@ -23,7 +23,7 @@ export default function Home() {
             <li>✓ New game every month</li>
           </ul>
           <a 
-  href="https://buy.stripe.com/YOUR_NEW_1499_LINK_HERE"
+  href="https://buy.stripe.com/aFa4gz2UcgqO6id0fo8IU02"
 "
   target="_blank"
   style={{width: '100%', backgroundColor: '#FFB800', color: 'black', padding: '16px', borderRadius: '8px', fontSize: '20px', fontWeight: 'bold', textAlign: 'center', display: 'block', textDecoration: 'none'}}
