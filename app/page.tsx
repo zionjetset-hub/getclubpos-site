@@ -16,7 +16,7 @@ export default function Home() {
           <li>Cancel anytime</li>
         </ul>
         <a 
-        href="https://buy.stripe.com/aFa4gz2Ucgq06id0fo8IU02"
+        href="https://buy.stripe.com/cNieVddyQ2zY4a58LU8IU03"
           style={{display: 'inline-block', backgroundColor: '#FFB800', color: '#000', fontWeight: 'bold', fontSize: '20px', padding: '16px 32px', borderRadius: '8px', textDecoration: 'none'}}
         >
           Join Slice Club-$14.99/mo
