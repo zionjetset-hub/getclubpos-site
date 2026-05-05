@@ -15,7 +15,7 @@ export default function Home() {
         
         <div style={{border: '2px solid #FFB800', borderRadius: '12px', padding: '32px', backgroundColor: '#111'}}>
           <h2 style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '8px', color: '#FFB800'}}>Model 1: Slice Club</h2>
-          https://buy.stripe.com/aFa4gz2UcgqO6id0fo8IU02
+          $14.99
 <ul style={{fontSize: '18px', marginBottom: '32px', lineHeight: '1.6'}}>
   <li>✓ Unlimited arcade games in-store</li>
   <li>✓ Customer loyalty & rewards</li>
