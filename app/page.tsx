@@ -1,22 +1,19 @@
 export default function Home() {
   return (
-    <main style={{minHeight: '100vh', backgroundColor: '#000', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px'}}>
-      <div style={{maxWidth: '600px', textAlign: 'center'}}>
-        <h1 style={{fontSize: '48px', fontWeight: 'bold', marginBottom: '24px', lineHeight: '1.1'}}>
-          Slice Club
+    <main className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
+      <div className="flex flex-col items-center justify-center w-full">
+        <h1 className="text-yellow-400 text-4xl md:text-6xl font-bold mb-2 text-center">
+          GET SLICED CLUB
         </h1>
-        <p style={{fontSize: '20px', marginBottom: '32px', color: '#ccc'}}>
-          One slice per day. Every day. For members only.
+        <p className="text-white text-lg md:text-xl mb-2 text-center max-w-2xl">
+          One slice per day, every day for members only
         </p>
-        <h2 style={{fontSize: '30px', fontWeight: 'bold', marginBottom: '8px', color: '#FFB800'}}>
-          $14.99
-        </h2>
-        <ul style={{fontSize: '18px', marginBottom: '32px', lineHeight: '1.6'}}>
-          <li>1 slice per day. Every day.</li>
-          <li>Cancel anytime</li>
-        </ul>
-         <a
-          href="https://buy.stripe.com/cNieVddyQ2zY4a58LU8IU03"
+        <p className="text-gray-300 text-base mb-8 text-center">
+          $14.99/mo • Cancel anytime
+        </p>
+        
+        <a
+          href="https://buy.stripe.com/cNieVdyQ2zY4a58LU8IU03"
           style={{display: 'inline-block', backgroundColor: '#FFB800', color: '#000', fontWeight: 'bold', fontSize: '20px', padding: '16px 32px', borderRadius: '8px', textDecoration: 'none'}}
         >
           Join Slice Club - $14.99/mo
@@ -34,9 +31,7 @@ export default function Home() {
           </div>
           <p className="text-gray-400 text-sm mt-2 text-center">Score 10+ to unlock a free slice deal</p>
         </div>
-
-  </div>
       </div>
     </main>
-  );
+  )
 }
