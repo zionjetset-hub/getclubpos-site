@@ -3,7 +3,7 @@ export default function Home() {
     <main style={{minHeight: '100vh', backgroundColor: '#000', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px'}}>
       <div style={{maxWidth: '600px', textAlign: 'center'}}>
         <h1 style={{fontSize: '48px', fontWeight: 'bold', marginBottom: '24px', lineHeight: '1.1'}}>
-          Mike's Pizza Slice Club
+          Slice Club
         </h1>
         <p style={{fontSize: '20px', marginBottom: '32px', color: '#ccc'}}>
           One slice per day. Every day. For members only.
@@ -12,7 +12,7 @@ export default function Home() {
           $14.99
         </h2>
         <ul style={{fontSize: '18px', marginBottom: '32px', lineHeight: '1.6'}}>
-          <li>1 slice per day, every four hours</li>
+          <li>1 slice per day. Every day.</li>
           <li>Cancel anytime</li>
         </ul>
         <a 
