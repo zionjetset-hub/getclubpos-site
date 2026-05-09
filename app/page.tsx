@@ -13,7 +13,7 @@ export default function Home() {
         </p>
         
         <a
-          href="https://buy.stripe.com/cNieVdyQ2zY4a58LU8IU03"
+          href="https://buy.stripe.com/cNieVddyQ2zY4a58LU8IU03"
           style={{display: 'inline-block', backgroundColor: '#FFB800', color: '#000000', fontWeight: 'bold', fontSize: '20px', padding: '16px 32px', borderRadius: '8px', textDecoration: 'none'}}
         >
           Join Slice Club - $14.99/mo
