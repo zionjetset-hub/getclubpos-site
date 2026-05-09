@@ -18,8 +18,8 @@ export default function Home() {
         <a 
         href="https://buy.stripe.com/cNieVddyQ2zY4a58LU8IU03"
           style={{display: 'inline-block', backgroundColor: '#FFB800', color: '#000', fontWeight: 'bold', fontSize: '20px', padding: '16px 32px', borderRadius: '8px', textDecoration: 'none'}}
-        >
-          Join Slice Club - $14.99/mo
+ >
+Join Slice Club - $14.99/mo
         </a>  <div className="mt-8 w-full max-w-2xl mx-auto px-4">
     <h3 className="text-white text-xl font-bold mb-4 text-center">Play Pizza Flap 🍕</h3>
     <div className="w-full aspect-[9/16] md:aspect-[4/3] border-2 border-yellow-400 rounded-lg overflow-hidden">
