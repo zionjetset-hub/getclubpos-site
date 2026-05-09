@@ -15,23 +15,25 @@ export default function Home() {
           <li>1 slice per day. Every day.</li>
           <li>Cancel anytime</li>
         </ul>
-        <a 
-        href="https://buy.stripe.com/cNieVddyQ2zY4a58LU8IU03"
+         <a
+          href="https://buy.stripe.com/cNieVddyQ2zY4a58LU8IU03"
           style={{display: 'inline-block', backgroundColor: '#FFB800', color: '#000', fontWeight: 'bold', fontSize: '20px', padding: '16px 32px', borderRadius: '8px', textDecoration: 'none'}}
- >
-Join Slice Club - $14.99/mo
-        </a>  <div className="mt-8 w-full max-w-2xl mx-auto px-4">
-    <h3 className="text-white text-xl font-bold mb-4 text-center">Play Pizza Flap 🍕</h3>
-    <div className="w-full aspect-[9/16] md:aspect-[4/3] border-2 border-yellow-400 rounded-lg overflow-hidden">
-      <iframe 
-        src="/game/pizza-flap.html" 
-        className="w-full h-full"
-        title="Pizza Flap Game"
-        allow="autoplay"
-      ></iframe>
-    </div>
-    <p className="text-gray-400 text-sm mt-2 text-center">Score 10+ to unlock a free slice deal</p>
-  </div>
+        >
+          Join Slice Club - $14.99/mo
+        </a>
+
+        <div className="mt-8 w-full max-w-2xl mx-auto px-4">
+          <h3 className="text-white text-xl font-bold mb-4 text-center">Play Pizza Flap 🍕</h3>
+          <div className="w-full aspect-[9/16] md:aspect-[4/3] border-2 border-yellow-400 rounded-lg overflow-hidden">
+            <iframe 
+              src="/game/pizza-flap.html" 
+              className="w-full h-full"
+              title="Pizza Flap Game"
+              allow="autoplay"
+            ></iframe>
+          </div>
+          <p className="text-gray-400 text-sm mt-2 text-center">Score 10+ to unlock a free slice deal</p>
+        </div>
 
   </div>
       </div>
