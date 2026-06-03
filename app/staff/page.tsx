@@ -44,7 +44,6 @@ export default function StaffPage() {
     <main
       style={{
         minHeight: "100vh",
-        backgroundColor: "#000000",
         color: "#FFFFFF",
         padding: "24px 16px",
         display: "flex",

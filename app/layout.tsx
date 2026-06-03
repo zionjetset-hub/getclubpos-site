@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import FoodRain from "./components/FoodRain";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Club POS | Get Sliced Club",
@@ -21,7 +23,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <FoodRain />
+        <div className="app-content">{children}</div>
+      </body>
     </html>
   )
 }

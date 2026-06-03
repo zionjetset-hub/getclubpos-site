@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main style={{minHeight: '100vh', backgroundColor: '#000000', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px'}}>
+    <main style={{minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px'}}>
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', textAlign: 'center'}}>
         <h1 style={{color: '#FFB800', fontSize: '48px', fontWeight: 'bold', marginBottom: '16px', lineHeight: '1.1'}}>
           Club POS
