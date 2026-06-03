@@ -2,15 +2,32 @@
 
 One-time setup (~10 minutes). After this, every redemption form submit gets:
 
-- **ACCEPTED** (green row) — under 7 this month  
-- **DENIED - LIMIT REACHED** (red row) — already at 7  
-- Columns: **Status**, **Redemptions this month**, **Remaining**
+- **ACCEPTED** (green row) — under 7 this month and 4+ hours since last accept  
+- **DENIED - LIMIT REACHED** (red) — already 7 accepted this month  
+- **DENIED - WAIT 4 HOURS** (red) — same member redeemed too recently  
+- Columns: **Status**, **Redemptions this month**, **Remaining** (values only — no formulas)
 
 **Your sheet:**  
 https://docs.google.com/spreadsheets/d/1AZCxQ13A579JT87DszcTVe8htIFcRwT5UyI40LJeMn4/edit#gid=398899636
 
 **Redemption form:**  
 https://docs.google.com/forms/d/e/1FAIpQLSdjY_3bvQsSJI1SLo0WqFgWLfVMnuNq3L2S6n6CSdGzQL-GUw/viewform
+
+---
+
+## Fix broken sheet (do this if Status shows phone numbers)
+
+Your sheet had these problems (now fixed by `repairAllRows`):
+
+| Problem | What you had |
+|---------|----------------|
+| Column D (Status) | Phone numbers copied instead of ACCEPTED / DENIED |
+| Column E | Empty — no monthly count |
+| Column F | Broken formula `=IF(E2<240,...)` stuck on row 2 |
+| Row 14 | Junk formula row |
+| Member 3101 | 9+ rows with no limit enforced |
+
+**Fix:** paste the latest script, then run **`repairAllRows()`** once.
 
 ---
 
@@ -24,12 +41,11 @@ https://docs.google.com/forms/d/e/1FAIpQLSdjY_3bvQsSJI1SLo0WqFgWLfVMnuNq3L2S6n6C
 
 ---
 
-## Step 2 — Run setup (once)
+## Step 2 — Run setup + repair (once)
 
-1. In the script editor, select function **`setupClubPosSheet`** from the dropdown.  
-2. Click **Run**.  
-3. Google asks for permissions → **Review permissions → Allow** (your Google account).  
-4. Switch back to the sheet — row 1 should now include **Status**, **Redemptions this month**, **Remaining**.
+1. Select **`setupClubPosSheet`** → **Run** → Allow permissions.  
+2. Select **`repairAllRows`** → **Run** (fixes all existing rows + removes junk formulas).  
+3. Check the sheet — green **ACCEPTED**, red **DENIED**, counts in column E, no formulas in F.
 
 ---
 
@@ -58,7 +74,7 @@ Delete test rows when done.
 2. Staff submits **redemption form** *before* or right as they hand over the item.  
 3. Staff glances at the sheet (or waits for confirmation row):  
    - **Green / ACCEPTED** → OK  
-   - **Red / DENIED** → do not redeem; explain 7/month limit  
+   - **Red / DENIED** → do not redeem (7/month cap or 4-hour wait)  
 4. Bookmark **https://www.getclubpos.com/staff** on the shop tablet.
 
 ---
@@ -82,7 +98,7 @@ The script already sets row background on each new submit.
 |---------|-----|
 | No Status column after run | Run `setupClubPosSheet` again on the correct tab |
 | Submit doesn’t update sheet | Run `installFormTrigger` again; confirm form is linked to **this** sheet |
-| Wrong column layout | Form must be: Timestamp, Last 4 phone, Cashier — or edit `COL_*` constants in the script |
+| Status shows phone numbers in column D | Run **`repairAllRows()`** with the latest script |
 | Script permission errors | Extensions → Apps Script → Run any function → re-authorize |
 
 ---

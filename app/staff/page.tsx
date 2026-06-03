@@ -188,7 +188,7 @@ export default function StaffPage() {
             lineHeight: 1.5,
           }}
         >
-          Status column: ACCEPTED (green) or DENIED (red). Max 7 accepted redemptions per phone per month.
+          Status: ACCEPTED (green), DENIED - LIMIT REACHED, or DENIED - WAIT 4 HOURS (red). Max 7 accepted per month.
         </section>
       </div>
     </main>
