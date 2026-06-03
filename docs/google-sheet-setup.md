@@ -41,20 +41,22 @@ Your sheet had these problems (now fixed by `repairAllRows`):
 
 ---
 
-## Step 2 — Run setup + repair (once)
+## Step 2 — Run setup (once)
 
-1. Select **`setupClubPosSheet`** → **Run** → Allow permissions.  
-2. Select **`repairAllRows`** → **Run** (fixes all existing rows + removes junk formulas).  
-3. Check the sheet — green **ACCEPTED**, red **DENIED**, counts in column E, no formulas in F.
+1. At the top of Apps Script, open the function dropdown.  
+2. Select **`runAllSetup`** (or **`myFunction`** — same thing).  
+3. Click **Run** → **Allow** permissions when asked.  
+4. Wait for “Execution completed” and a toast on the sheet.  
+5. Refresh the sheet — **Status** should show ACCEPTED / DENIED with green/red rows.
+
+> **Error “myFunction was deleted”?** Save the script, pick **`runAllSetup`** from the dropdown, and Run again.  
+> Also check **Triggers** (clock icon) and delete any broken trigger not named `onFormSubmit`.
 
 ---
 
-## Step 3 — Install the form trigger (once)
+## Step 3 — Install the form trigger (skip if you ran runAllSetup)
 
-1. In Apps Script, select function **`installFormTrigger`**.  
-2. Click **Run**.  
-3. Submit a **test** redemption from the form (fake last-4 + cashier name).  
-4. Refresh the sheet — the new row should be **green** with **ACCEPTED** and **Remaining: 6**.
+`runAllSetup` already runs `installFormTrigger`. Only run **`installFormTrigger`** again if new submits do not update Status.
 
 ---
 

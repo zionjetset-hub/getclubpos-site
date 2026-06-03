@@ -3,11 +3,30 @@
  *
  * Sheet: https://docs.google.com/spreadsheets/d/1AZCxQ13A579JT87DszcTVe8htIFcRwT5UyI40LJeMn4/
  *
- * RUN ONCE (in order):
+ * EASIEST: select runAllSetup from the dropdown → Run (once).
+ *
+ * Or run manually in order:
  *   1. setupClubPosSheet()
- *   2. repairAllRows()        ← fixes your broken Status / formula columns
+ *   2. repairAllRows()
  *   3. installFormTrigger()
  */
+
+/** One-click setup — use this if you see "myFunction was deleted" errors. */
+function runAllSetup() {
+  setupClubPosSheet();
+  repairAllRows();
+  installFormTrigger();
+  SpreadsheetApp.getActiveSpreadsheet().toast(
+    "Club POS setup done. Check Status column for green/red rows.",
+    "Success",
+    8
+  );
+}
+
+/** Default Google placeholder name — forwards to runAllSetup so Run still works. */
+function myFunction() {
+  runAllSetup();
+}
 
 const MONTHLY_LIMIT = 7;
 const COOLDOWN_MINUTES = 240; // 4 hours between accepted redemptions
