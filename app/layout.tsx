@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import FoodRain from "./components/FoodRain";
+import SiteFooter from "./components/SiteFooter";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,7 +26,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <FoodRain />
-        <div className="app-content">{children}</div>
+        <div className="app-content">
+          {children}
+          <SiteFooter />
+        </div>
       </body>
     </html>
   )

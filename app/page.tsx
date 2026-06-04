@@ -13,7 +13,7 @@ export default function Home() {
         <p style={{color: '#FFB800', fontSize: '28px', fontWeight: 'bold', marginBottom: '24px'}}>
           $14.99<span style={{fontSize: '16px', color: '#CCCCCC', fontWeight: 'normal'}}>/mo</span>
         </p>
-        
+
         <a
           href="https://buy.stripe.com/cNieVddyQ2zY4a58LU8IU03"
           style={{display: 'inline-block', backgroundColor: '#FFB800', color: '#000000', fontWeight: 'bold', fontSize: '20px', padding: '16px 32px', borderRadius: '8px', textDecoration: 'none'}}
@@ -21,11 +21,18 @@ export default function Home() {
           Join the Club — $14.99/mo
         </a>
 
+        <p className="legal-notice">
+          By subscribing, you agree to our{" "}
+          <a href="/terms">Terms of Service</a>,{" "}
+          <a href="/privacy">Privacy Policy</a>, and{" "}
+          <a href="/billing">Billing &amp; Refunds</a>.
+        </p>
+
         <div style={{marginTop: '32px', width: '100%', maxWidth: '600px', padding: '0 16px'}}>
           <h3 style={{color: '#FFFFFF', fontSize: '20px', fontWeight: 'bold', marginBottom: '16px'}}>While you&apos;re here — play Pizza Flap 🍕</h3>
           <div style={{width: '100%', aspectRatio: '9/16', border: '2px solid #FFB800', borderRadius: '8px', overflow: 'hidden'}}>
-            <iframe 
-              src="/game/pizza-flap.html" 
+            <iframe
+              src="/game/pizza-flap.html"
               style={{width: '100%', height: '100%', border: 'none'}}
               title="Pizza Flap Game"
               allow="autoplay"
